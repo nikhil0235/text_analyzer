@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import File
+from .forms import UploadFileForm
 from collections import Counter
 import re
 from django.contrib.auth.views import LoginView
@@ -19,42 +20,30 @@ from django.shortcuts import render
 class CustomLogoutView(LogoutView):
     template_name = 'registration/logged_out.html'  # Customize the template if needed
 
-
-
-# @login_required(login_url='login') 
-# def analyze_text(request):
-#     if request.method == 'POST' and request.FILES['file']:
-#         uploaded_file = request.FILES['file']
-#         content = uploaded_file.read().decode('utf-8')
-
-#         # Use regex to extract words from the document
-#         words = re.findall(r'\b\w+\b', content.lower())
-
-#         # Count the occurrences of each word
-#         word_count = Counter(words)
-
-#         # Return the result as JSON
-#         return JsonResponse(word_count)
-
-#     return render(request, 'analyzer/analyze.html')
 @login_required(login_url='login')
 def analyze_text(request):
-    result = None
+    result = {}
 
-    if request.method == 'POST' and request.FILES['file']:
-        uploaded_file = request.FILES['file']
-        content = uploaded_file.read().decode('utf-8')
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = request.FILES['file']
+            content = uploaded_file.read().decode('utf-8')
 
-        # Use regex to extract words from the document
-        words = re.findall(r'\b\w+\b', content.lower())
+            # Use regex to extract words from the document
+            words = re.findall(r'\b\w+\b', content.lower())
 
-        # Count the occurrences of each word
-        word_count = Counter(words)
+            # Count the occurrences of each word
+            word_count = Counter(words)
 
-        # Convert result to a readable format
-        result = ', '.join(f'{word} - {count}' for word, count in word_count.items())
+            # Convert result to a readable format
+            result = dict(word_count)
 
-    return render(request, 'analyzer/analyze.html', {'result': result})
+    else:
+        form = UploadFileForm()
+
+    return render(request, 'analyzer/analyze.html', {'form': form, 'result': result})
+
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'

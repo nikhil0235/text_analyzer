@@ -8,6 +8,43 @@
     <title>{% block title %}Text Analyzer{% endblock %}</title>
     <style>
         body {
+            .word-table th {
+                background-color: #f2f2f2;
+                padding: 10px;
+                text-align: left;
+                color: black; /* Set the font color to black */
+            }
+            #result-header {
+                text-decoration:underline;
+                text-align: center;
+                margin-top: 20px; /* Add a top margin for spacing */
+            }
+            /* Add styles for the word table container */
+.word-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Add styles for the word table */
+.word-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Add styles for table headers */
+.word-table th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Add styles for table cells */
+.word-table td, .word-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
             background-color: #1e1e1e; /* Dark background color */
             color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,36 +53,75 @@
         }
 
         nav {
+            align-items: center;
+            display: flex;
             background-color: #333;
             padding: 10px;
             text-align: center;
         }
-
+        
         nav a {
             color: #fff;
             text-decoration: none;
             padding: 15px;
-            margin: 0 20px; /* Increased margin for more spacing */
-            transition: color 0.3s; /* Smooth color transition */
+            transition: color 0.3s;
         }
-
         nav a:hover {
             color: #61dafb; /* Change color on hover */
         }
-
-        div {
-            padding: 20px;
+        .form-container {
+            
+            margin-left: 20px;
         }
+form {
+    align-items: center;
+}
+
+input[type="submit"] {
+    color: #fff;
+    background-color: #333;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Style for form fields */
+form input, form button {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+        
+        label {
+            display: block;
+            margin-bottom: 4px;
+        }
+        input[type="submit"] {
+            color: #fff;
+            background-color: #333;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        
+        
+
     </style>
 </head>
 <body>
     <nav>
         <a href="{% url 'analyze_text' %}">Analyze Text</a>
         {% if user.is_authenticated %}
+        
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <input type="submit" value="Logout">
-        </form>
+        </form> 
         {% else %}
             <a href="{% url 'login' %}">Login</a>
             <a href="{% url 'signup' %}">Sign Up</a>

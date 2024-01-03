@@ -9,3 +9,7 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User  # Assuming you have imported User model from django.contrib.auth.models
         fields = ['username', 'password1', 'password2']
+
+        
+class UploadFileForm(forms.Form):
+    file = forms.FileField()
