@@ -1,0 +1,28 @@
+<!-- analyzer/templates/analyzer/analyze.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Text Analyzer{% endblock %}
+
+{% block content %}
+    <h1>Text Analyzer</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'analyze_text' %}">
+        {% csrf_token %}
+        <label for="file">Choose a text file:</label>
+        <input type="file" name="file" accept=".txt" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if not user.is_authenticated %}
+        {% comment %} <a href="{% url 'logout' %}">Logout</a> {% endcomment %}
+        <!-- If user is not authenticated, you can provide a link to the login page -->
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+{% endblock %}
+<h1>Analysis Result</h1>
+    {% if result %}
+        <p>{{ result }}</p>
+    {% else %}
+        <p>No analysis result available.</p>
+    {% endif %}
+
