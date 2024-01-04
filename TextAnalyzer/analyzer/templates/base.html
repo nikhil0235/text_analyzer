@@ -5,9 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Text Analyzer{% endblock %}</title>
+    <div class="title-container">
+        <title>{% block title %}Text Analyzer{% endblock %}</title>
+    </div>
     <style>
         body {
+            h1{
+                margin-left:20px;
+            }
+            form {
+                margin-left:20px;
+                
+            }
             .word-table th {
                 background-color: #f2f2f2;
                 padding: 10px;
@@ -65,16 +74,22 @@
             text-decoration: none;
             padding: 15px;
             transition: color 0.3s;
+            font-size:20px;
+            font-weight: bold;
         }
         nav a:hover {
             color: #61dafb; /* Change color on hover */
         }
         .form-container {
             
+            
             margin-left: 20px;
         }
 form {
+    font-size:20px;
+    font-weight: bold;
     align-items: center;
+    
 }
 
 input[type="submit"] {
@@ -88,6 +103,8 @@ input[type="submit"] {
 
 /* Style for form fields */
 form input, form button {
+    font-size:15px;
+    font-weight: bold;
     margin: 5px 0;
     padding: 5px;
 }
@@ -106,7 +123,7 @@ form input, form button {
             transition: background-color 0.3s;
         }
         input[type="submit"]:hover {
-            background-color: #555;
+            color: #61dafb;
         }
         
         

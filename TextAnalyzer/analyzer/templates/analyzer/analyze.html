@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %}Text Analyzer{% endblock %}
+
+ {% block title %}Text Analyzer{% endblock %}
 
 {% block content %}
+
     <h1>Text Analyzer</h1>
-    <form method="post" enctype="multipart/form-data" action="{% url 'analyze_text' %}">
+    <form   method="post" enctype="multipart/form-data" action="{% url 'analyze_text' %}">
         {% csrf_token %}
         <label for="file">Choose a text file:</label>
         <input type="file" name="file" accept=".txt" required>
         <button type="submit">Submit</button>
     </form>
-     
-     {% comment %} <h1 id="result-header" style="display: none;">Analysis Result</h1>
-     <p>{{ result }}</p> {% endcomment %}
-     {% comment %} {% if user.is_authenticated and result and result.items %}
-        <h2 id="result-header">Analysis Result</h2>
-        <div class="word-grid">
-            {% for word, count in result.items %}
-                <div class="word-item">
-                    <p>{{ word }}</p>
-                    <p>{{ count }}</p>
-                </div>
-            {% endfor %}
+    
+    {% comment %} <h1 id="result-header" style="display: none;">Analysis Result</h1>
+    <p>{{ result }}</p> {% endcomment %}
+    {% comment %} {% if user.is_authenticated and result and result.items %}
+    <h2 id="result-header">Analysis Result</h2>
+    <div class="word-grid">
+        {% for word, count in result.items %}
+        <div class="word-item">
+            <p>{{ word }}</p>
+            <p>{{ count }}</p>
+        </div>
+        {% endfor %}
         </div>
     {% endif %} {% endcomment %}
     {% if user.is_authenticated and result and result.items %}
@@ -36,10 +38,10 @@
                 </thead>
                 <tbody>
                     {% for word, count in result.items %}
-                        <tr>
-                            <td>{{ word }}</td>
-                            <td>{{ count }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ word }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
