@@ -37,7 +37,7 @@ Run the Django development server:
 bash
 Copy code
 python manage.py runserver
-Visit [http://127.0.0.1:8000/analyzer/] in your web browser.
+Visit [http://127.0.0.1:8000/analyzer/analyze] in your web browser.
 
 You'll be prompted to log in. If you don't have an account, you can sign up.
 
