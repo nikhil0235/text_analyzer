@@ -26,7 +26,7 @@ Clone the repository to your local machine:
 
 bash
 Copy code
-git clone https://github.com/your-username/text-analyzer-web-app.git
+git clone https://github.com/nikhil0235/text_analyzer.git
 Install the necessary dependencies. If you're using Django, you can do this with:
 
 bash
